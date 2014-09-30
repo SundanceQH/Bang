@@ -12,7 +12,7 @@ namespace Bang.Module.Users.Tests
     public class UsersServiceTests
     {
         [TestMethod]
-        public void TestCreate()
+        public void UserService_Create()
         {
             //Mock Storage
             IStorage<User> UserStorage = Mock.Interface<IStorage<User>>();

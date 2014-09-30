@@ -5,6 +5,8 @@ using System.Text;
 using Bang.Core.Data.Generic;
 using Bang.Core.Data.Mongo;
 using Bang.Module.Users.Storage.Objects;
+using MongoDB.Bson;
+using MongoDB.Driver.Builders;
 
 namespace Bang.Module.Users.Storage
 {
@@ -21,6 +23,22 @@ namespace Bang.Module.Users.Storage
                 throw new Exception("Unable to save user");
             }
 
+        }
+
+        public User Read(string Id)
+        {
+            return this.UserConnection.MongoCollection.FindOne(Query<User>.EQ(x=>x.Id, new ObjectId(Id)));            
+
+        }
+
+        public void Update(User obj)
+        {
+            this.UserConnection.MongoCollection.Save(obj);
+        }
+
+        public void Delete(string Id)
+        {
+            this.UserConnection.MongoCollection.Remove(Query<User>.EQ(x => x.Id, new ObjectId(Id)));
         }
     }
 }
